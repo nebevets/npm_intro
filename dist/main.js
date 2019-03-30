@@ -92,6 +92,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _add__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+
 
 
 
@@ -102,6 +104,14 @@ Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["addToDom"])(`5 + 8 = ${Object(_add
 Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["makeElement"])('h2', 'this is a h2');
 
 _helpers__WEBPACK_IMPORTED_MODULE_0__["default"].makeElement('p', 'paragraph boy')
+
+function pause(delay){
+  return function(callback){
+    setTimeout(callback, delay);
+  }
+}
+
+var promise = new MyPromise(pause(5000))
 
 /***/ }),
 /* 1 */
@@ -141,6 +151,27 @@ function add(num1, num2){
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (add);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MyPromise; });
+class MyPromise {
+  constructor(runner){
+    this.callbacks = [];
+    runner(this._resolve);
+  }
+  _resolve(value){
+    const callback = this.callbacks.shift();
+    callback(value);
+  }
+  then(callback){
+    this.callbacks.push(callback);
+  }
+}
 
 /***/ })
 /******/ ]);
