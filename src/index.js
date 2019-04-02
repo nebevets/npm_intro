@@ -1,27 +1,31 @@
-import sQuery, { addToDom, makeElement } from './helpers';
-import add from './add';
-import MyPromise from './promise';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/app';
 
-addToDom('this is here because we made it be here');
+// const h1 = React.createElement('h1', {}, 'welcome to react');
+// const p = React.createElement('p', {}, 'this is a paragraph');
+// const container = React.createElement('div', {}, [h1, p]);
 
-addToDom(`5 + 8 = ${add(5,8)}`);
+// const container = (
+//   <div>
+//     <h1>really nice h1</h1>
+//     <p>followed by a fairly nice paragraph</p>
+//   </div>
+// );
 
-makeElement('h2', 'this is a h2');
+// const user1 = {
+//   firstName: 'Mike',
+//   lastName: 'Jibrony',
+//   prefix: 'Mr.'
+// }
 
-sQuery.makeElement('p', 'paragraph boy')
+// function properLastName(user){
+//   return `${user.prefix} ${user.lastName}`;
+// }
 
-function pause(delay){
-  return function(callback){
-    setTimeout(callback, delay);
-  }
-}
+// const greeting = <h1>Hello {properLastName(user1)}, welcome to our site.</h1>
 
-var promise = new MyPromise(pause(5000));
-
-function logValue(value){
-  return function(){
-    console.log(value);
-  }
-}
-
-promise.then(logValue('as promised, you have been assilimated'));
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
