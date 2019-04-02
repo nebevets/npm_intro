@@ -13,4 +13,13 @@ module.exports = {
     contentBase: path.resolve(__dirname),
     publicPath: '/dist', 
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };

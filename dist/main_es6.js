@@ -96,26 +96,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["addToDom"])('this is here because we made it be here');
-Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["addToDom"])("5 + 8 = ".concat(Object(_add__WEBPACK_IMPORTED_MODULE_1__["default"])(5, 8)));
+
+Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["addToDom"])(`5 + 8 = ${Object(_add__WEBPACK_IMPORTED_MODULE_1__["default"])(5,8)}`);
+
 Object(_helpers__WEBPACK_IMPORTED_MODULE_0__["makeElement"])('h2', 'this is a h2');
-_helpers__WEBPACK_IMPORTED_MODULE_0__["default"].makeElement('p', 'paragraph boy');
 
-function pause(delay) {
-  return function (callback) {
+_helpers__WEBPACK_IMPORTED_MODULE_0__["default"].makeElement('p', 'paragraph boy')
+
+function pause(delay){
+  return function(callback){
     setTimeout(callback, delay);
-  };
+  }
 }
 
-var promise = new _promise__WEBPACK_IMPORTED_MODULE_2__["default"](pause(5000));
-
-function logValue(value) {
-  return function () {
-    console.log(value);
-  };
-}
-
-promise.then(logValue('as promised, you have been assilimated'));
+var promise = new MyPromise(pause(5000))
 
 /***/ }),
 /* 1 */
@@ -125,22 +121,23 @@ promise.then(logValue('as promised, you have been assilimated'));
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToDom", function() { return addToDom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeElement", function() { return makeElement; });
-function addToDom(message) {
-  var root = document.getElementById('root');
-  var h1 = document.createElement('div');
+function addToDom(message){
+  const root = document.getElementById('root');
+  const h1 = document.createElement('div');
   h1.innerText = message;
   root.appendChild(h1);
-}
-;
-var makeElement = function makeElement(type, text) {
-  var root = document.getElementById('root');
-  var element = document.createElement(type);
+};
+
+const makeElement = (type, text) => {
+  const root = document.getElementById('root');
+  const element = document.createElement(type);
   element.innerText = text;
   root.appendChild(element);
 };
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   addToDom: addToDom,
-  makeElement: makeElement
+  makeElement: makeElement,
 });
 
 /***/ }),
@@ -149,7 +146,7 @@ var makeElement = function makeElement(type, text) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function add(num1, num2) {
+function add(num1, num2){
   return num1 + num2;
 }
 
@@ -162,42 +159,19 @@ function add(num1, num2) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MyPromise; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var MyPromise =
-/*#__PURE__*/
-function () {
-  function MyPromise(runner) {
-    _classCallCheck(this, MyPromise);
-
+class MyPromise {
+  constructor(runner){
     this.callbacks = [];
-    this._resolve = this._resolve.bind(this);
     runner(this._resolve);
   }
-
-  _createClass(MyPromise, [{
-    key: "_resolve",
-    value: function _resolve(value) {
-      if (this.callbacks.length > 0) {
-        var callback = this.callbacks.shift();
-        callback(value);
-      }
-    }
-  }, {
-    key: "then",
-    value: function then(callback) {
-      this.callbacks.push(callback);
-    }
-  }]);
-
-  return MyPromise;
-}();
-
-
+  _resolve(value){
+    const callback = this.callbacks.shift();
+    callback(value);
+  }
+  then(callback){
+    this.callbacks.push(callback);
+  }
+}
 
 /***/ })
 /******/ ]);
